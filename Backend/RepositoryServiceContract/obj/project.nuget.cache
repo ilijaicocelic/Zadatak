@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "fP5KD3L5J2ilssTREbtiR1Hk8MmLwaEkW6OabGQ+FYoK4az/MBhZwCHgG5qNnyfPkzN+L3LS1S5X3nRzSqC8+Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\icoce\\Desktop\\Zadatak\\Backend\\RepositoryServiceContract\\RepositoryServiceContract.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\icoce\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\icoce\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\icoce\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
