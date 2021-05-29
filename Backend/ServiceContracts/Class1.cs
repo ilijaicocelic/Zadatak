@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RepositoryServiceContract
+namespace ServiceContracts
 {
     public class Class1
     {

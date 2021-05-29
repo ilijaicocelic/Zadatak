@@ -1,0 +1,9 @@
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\bin\Debug\netstandard2.0\Services.deps.json
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\bin\Debug\netstandard2.0\Services.dll
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\bin\Debug\netstandard2.0\Services.pdb
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\obj\Debug\netstandard2.0\Services.csproj.CoreCompileInputs.cache
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\obj\Debug\netstandard2.0\Services.AssemblyInfoInputs.cache
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\obj\Debug\netstandard2.0\Services.AssemblyInfo.cs
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\obj\Debug\netstandard2.0\Services.dll
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\obj\Debug\netstandard2.0\Services.pdb
+C:\Users\icoce\Desktop\Zadatak\Backend\Services\obj\Debug\netstandard2.0\Services.csprojAssemblyReference.cache

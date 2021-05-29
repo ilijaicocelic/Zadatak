@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace RepositoryServiceContract
 {
-    class Course
+    public class Course
     {
+        [Key]
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+
     }
 }
