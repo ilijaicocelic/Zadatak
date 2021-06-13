@@ -1,10 +1,16 @@
 ﻿
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using RepositoryServiceContract;
+using ServiceContracts;
 using ServiceContracts.DTO;
 using ServiceContracts.Interfaces;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace Service
@@ -13,9 +19,12 @@ namespace Service
     {
         private UserMapper _userMapper;
         private IUserRepository _repositoryuser;
-        public UserService(IUserRepository userRepository)
+
+        private readonly ApplicationSettings _appSettings;
+        public UserService(IUserRepository userRepository, IOptions<ApplicationSettings> appSettings)
         {
             _repositoryuser = userRepository;
+            _appSettings = appSettings.Value;
             _userMapper = new UserMapper();
         }
 
@@ -37,7 +46,30 @@ namespace Service
 
         public string Login(LoginFormDTO loginFormDTO)
         {
-            return "";
+            List<User> Users = _repositoryuser.GetAllUsers().ToList();
+
+            User u1 = Users.Where(x => x.Username == loginFormDTO.Username && x.Password == loginFormDTO.Password).First();
+            if(u1 == null)
+            {
+                throw new KeyNotFoundException();
+            }
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                   {
+                        new Claim("UserId",user.Id.ToString()),
+                        new Claim("Roles", user.Role.ToString()),
+
+                    }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.WriteToken(securityToken);
+
+            return token;
         }
 
         public void ModifyStudent(Guid Id, UserDTORequest userDTO)

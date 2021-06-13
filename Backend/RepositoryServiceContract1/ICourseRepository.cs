@@ -13,5 +13,11 @@ namespace RepositoryServiceContract
         Guid AddCourse(Course course);
 
         IEnumerable<Course> GetAll();
+
+        IEnumerable<User> GetStudents(Guid CourseId);
+
+        void AddStudentToCourse(Guid UserId, Guid CourseId);
+
+        void RemoveStudentFromCourse(Guid UserId, Guid CourseId);
     }
 }

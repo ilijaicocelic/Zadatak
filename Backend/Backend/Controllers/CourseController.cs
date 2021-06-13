@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceContracts.DTO;
@@ -32,19 +35,46 @@ namespace Backend.Controllers
 
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult AddCourse([FromBody] CourseDTORequest course)
         {
             return Created("GetCourse", _courseService.AddCourse(course));
         }
 
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult ModifyCourse(Guid id, [FromBody] CourseDTORequest value)
         {
             _courseService.UpdateCourse(id, value);
             return NoContent();
         }
 
-      
-       
+
+        [HttpGet("{Id}")]
+        public ActionResult<IEnumerable<CourseDTO>> GetStudents(Guid Id)
+        {
+           
+            return Ok(_courseService.GetStudents(Id));
+        }
+
+        [HttpPut("{userId}/{CourseId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult AddStudent(Guid userId, Guid CourseId)
+        {
+            _courseService.AddStudentToCourse(userId, CourseId);
+            return NoContent();
+        }
+
+        [HttpDelete("{userId}/{CourseId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
+        public ActionResult RemoveStudent(Guid userId, Guid CourseId)
+        {
+            _courseService.RemoveStudentFromCourse(userId, CourseId);
+            return Ok();
+        }
+
+
+
     }
 }

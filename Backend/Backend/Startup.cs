@@ -60,7 +60,7 @@ namespace Backend
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICourseService, CourseService>();
 
-            var key = Encoding.UTF8.GetBytes("12345677890234567897543");//Configuration["ApplicationSettings:JWT_Secret"].ToString());
+            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
 
             services.AddAuthentication(x =>
             {

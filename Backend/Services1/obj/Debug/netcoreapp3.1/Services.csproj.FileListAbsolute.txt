@@ -6,7 +6,6 @@ C:\Users\icoce\Desktop\Zadatak\Backend\Services1\bin\Debug\netcoreapp3.1\Service
 C:\Users\icoce\Desktop\Zadatak\Backend\Services1\bin\Debug\netcoreapp3.1\RepositoryServiceContract.pdb
 C:\Users\icoce\Desktop\Zadatak\Backend\Services1\bin\Debug\netcoreapp3.1\ServiceContracts.pdb
 C:\Users\icoce\Desktop\Zadatak\Backend\Services1\obj\Debug\netcoreapp3.1\Services.csprojAssemblyReference.cache
-C:\Users\icoce\Desktop\Zadatak\Backend\Services1\obj\Debug\netcoreapp3.1\Services.csproj.CoreCompileInputs.cache
 C:\Users\icoce\Desktop\Zadatak\Backend\Services1\obj\Debug\netcoreapp3.1\Services.AssemblyInfoInputs.cache
 C:\Users\icoce\Desktop\Zadatak\Backend\Services1\obj\Debug\netcoreapp3.1\Services.AssemblyInfo.cs
 C:\Users\icoce\Desktop\Zadatak\Backend\Services1\obj\Debug\netcoreapp3.1\Services.csproj.CopyComplete

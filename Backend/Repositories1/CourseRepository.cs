@@ -1,7 +1,14 @@
 ﻿using RepositoryServiceContract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+
+using Microsoft.EntityFrameworkCore;
+
+using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -21,6 +28,11 @@ namespace Repositories
             return course.Id;
         }
 
+        public Guid AddStudentToCourse(Guid UserId, Guid CourseId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Course> GetAll()
         {
             return _context.Courses;
@@ -29,6 +41,18 @@ namespace Repositories
         public Course GetCourse(Guid Id)
         {
             return _context.Courses.Find(Id); ;
+        }
+
+        public IEnumerable<User> GetStudents(Guid CourseId)
+        {
+            return _context.Courses.Include(x => x.Students).Where(x => x.Id == CourseId).First().Students;
+        }
+
+        public void RemoveStudentFromCourse(Guid UserId, Guid CourseId)
+        {
+            User u1 = _context.Users.Find(UserId);
+            _context.Courses.Include(x => x.Students).Where(x => x.Id == CourseId).First().Students.Remove(u1);
+            _context.SaveChanges();
         }
 
         public void UpdateCourse(Course course)

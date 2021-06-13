@@ -15,6 +15,12 @@ namespace ServiceContracts.Interfaces
 
         IEnumerable<CourseDTO> GetAll();
 
+        void AddStudentToCourse(Guid UserId, Guid CourseId);
+
+        void RemoveStudentFromCourse(Guid UserId, Guid CourseId);
+
+        IEnumerable<UserDTO> GetStudents(Guid CourseId);
+
 
     }
 }

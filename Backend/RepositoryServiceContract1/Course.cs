@@ -21,6 +21,8 @@ namespace RepositoryServiceContract
 
         public string Teacher { get; set; }
 
+        public ICollection<User> Students { get; set; }
+
 
     }
 }
