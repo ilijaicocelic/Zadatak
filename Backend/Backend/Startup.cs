@@ -46,7 +46,7 @@ namespace Backend
 
 
 
-
+            
             services.AddDbContext<DataBaseDB>(options =>
              options.UseSqlServer("Server=DESKTOP-4MA4L5D; Database=Zadatak; Trusted_Connection=True; MultipleActiveResultSets=True;")
              );
