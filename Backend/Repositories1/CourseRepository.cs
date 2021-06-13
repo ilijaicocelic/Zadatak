@@ -7,24 +7,43 @@ namespace Repositories
 {
     public class CourseRepository : ICourseRepository
     {
+
+        private DataBaseDB _context;
+
+        public CourseRepository(DataBaseDB dataContext)
+        {
+            _context = dataContext;
+        }
         public Guid AddCourse(Course course)
         {
-            throw new NotImplementedException();
+            _context.Courses.Add(course);
+            _context.SaveChanges();
+            return course.Id;
         }
 
         public IEnumerable<Course> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Courses;
         }
 
         public Course GetCourse(Guid Id)
         {
-            throw new NotImplementedException();
+            return _context.Courses.Find(Id); ;
         }
 
         public void UpdateCourse(Course course)
         {
-            throw new NotImplementedException();
+            Course CourseForUpdate = _context.Courses.Find(course.Id);
+
+            if (CourseForUpdate == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            CourseForUpdate.Name = course.Name;
+            CourseForUpdate.Teacher = course.Teacher;
+
+            _context.Entry(CourseForUpdate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

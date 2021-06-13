@@ -4,9 +4,9 @@ C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\bin\Debug\netcoreapp3.1\Rep
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\bin\Debug\netcoreapp3.1\RepositoryServiceContract.dll
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\bin\Debug\netcoreapp3.1\RepositoryServiceContract.pdb
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.csprojAssemblyReference.cache
-C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.csproj.CoreCompileInputs.cache
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.AssemblyInfoInputs.cache
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.AssemblyInfo.cs
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.csproj.CopyComplete
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.dll
 C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.pdb
+C:\Users\icoce\Desktop\Zadatak\Backend\Repositories1\obj\Debug\netcoreapp3.1\Repositories.csproj.CoreCompileInputs.cache

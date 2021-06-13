@@ -13,9 +13,9 @@ namespace Repositories
             Database.EnsureCreated();
         }
 
-        DbSet<User> Users { get; set; }
+       public DbSet<User> Users { get; set; }
 
-        DbSet<Course> Courses { get; set; }
+       public DbSet<Course> Courses { get; set; }
 
     }
 }
