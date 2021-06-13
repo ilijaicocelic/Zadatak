@@ -16,6 +16,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Repositories;
 using RepositoryServiceContract;
+using ServiceContracts.Interfaces;
+using Service;
 
 namespace Backend
 {
@@ -55,6 +57,8 @@ namespace Backend
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICourseService, CourseService>();
 
             var key = Encoding.UTF8.GetBytes("12345677890234567897543");//Configuration["ApplicationSettings:JWT_Secret"].ToString());
 

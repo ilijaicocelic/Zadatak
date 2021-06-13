@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServiceContracts.DTO;
+using ServiceContracts.Interfaces;
 
 namespace Backend.Controllers
 {
@@ -11,36 +13,45 @@ namespace Backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        // GET: api/User
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IUserService _userservice;
+        public UserController(IUserService service)
         {
-            return new string[] { "value1", "value2" };
+            _userservice = service;
         }
 
         // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetUser")]
+        public ActionResult <UserDTO> GetUser(Guid id)
         {
-            return "value";
+            return Ok(_userservice.GetUser(id));
+        }
+
+        [HttpGet( Name = "GetAllUsers")]
+        public ActionResult< IEnumerable<UserDTO>> GetAllUsers()
+        {
+            return Ok(_userservice.GetAllUsers());
         }
 
         // POST: api/User
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult AddUser([FromBody] UserDTORequest user)
         {
+            return Created("GetUser",_userservice.AddUser(user));
         }
 
         // PUT: api/User/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult ModifyStudent(Guid id, [FromBody] UserDTORequest value)
         {
+            _userservice.ModifyStudent(id, value);
+            return NoContent();
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost]
+        public ActionResult Login([FromBody] LoginFormDTO form)
         {
+            return Ok(_userservice.Login(form));
         }
+
     }
 }

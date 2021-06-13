@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -15,10 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Repositories\Repositories.csproj" />
-    <ProjectReference Include="..\RepositoryServiceContract\RepositoryServiceContract.csproj" />
-    <ProjectReference Include="..\ServiceContracts\ServiceContracts.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\Repositories1\Repositories.csproj" />
+    <ProjectReference Include="..\RepositoryServiceContract1\RepositoryServiceContract.csproj" />
+    <ProjectReference Include="..\ServiceContracts1\ServiceContracts.csproj" />
+    <ProjectReference Include="..\Services1\Services.csproj" />
   </ItemGroup>
 
 

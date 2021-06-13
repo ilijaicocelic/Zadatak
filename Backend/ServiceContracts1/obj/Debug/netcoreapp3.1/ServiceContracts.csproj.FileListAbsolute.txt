@@ -1,0 +1,8 @@
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\bin\Debug\netcoreapp3.1\ServiceContracts.deps.json
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\bin\Debug\netcoreapp3.1\ServiceContracts.dll
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\bin\Debug\netcoreapp3.1\ServiceContracts.pdb
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\obj\Debug\netcoreapp3.1\ServiceContracts.csproj.CoreCompileInputs.cache
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\obj\Debug\netcoreapp3.1\ServiceContracts.AssemblyInfoInputs.cache
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\obj\Debug\netcoreapp3.1\ServiceContracts.AssemblyInfo.cs
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\obj\Debug\netcoreapp3.1\ServiceContracts.dll
+C:\Users\icoce\Desktop\Zadatak\Backend\ServiceContracts1\obj\Debug\netcoreapp3.1\ServiceContracts.pdb

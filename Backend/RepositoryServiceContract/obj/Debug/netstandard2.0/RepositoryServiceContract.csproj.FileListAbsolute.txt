@@ -1,9 +1,0 @@
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\obj\Debug\netstandard2.0\RepositoryServiceContract.csproj.CoreCompileInputs.cache
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\obj\Debug\netstandard2.0\RepositoryServiceContract.AssemblyInfoInputs.cache
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\obj\Debug\netstandard2.0\RepositoryServiceContract.AssemblyInfo.cs
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\bin\Debug\netstandard2.0\RepositoryServiceContract.deps.json
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\bin\Debug\netstandard2.0\RepositoryServiceContract.dll
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\bin\Debug\netstandard2.0\RepositoryServiceContract.pdb
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\obj\Debug\netstandard2.0\RepositoryServiceContract.dll
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\obj\Debug\netstandard2.0\RepositoryServiceContract.pdb
-C:\Users\icoce\Desktop\Zadatak\Backend\RepositoryServiceContract\obj\Debug\netstandard2.0\RepositoryServiceContract.csprojAssemblyReference.cache
