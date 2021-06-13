@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServiceContracts.DTO;
 using ServiceContracts.Interfaces;
 
 namespace Backend.Controllers
@@ -18,26 +19,29 @@ namespace Backend.Controllers
             _courseService = service;
         }
         [HttpGet("{id}", Name = "GetCourse")]
-        public string GetCourse(int id)
+        public ActionResult <CourseDTO>GetCourse(Guid id)
         {
-            return "value";
+            return Ok(_courseService.GetCourse(id));
         }
 
         [HttpGet(Name = "GetAllCourses")]
-        public string GetAllCourses(int id)
+        public ActionResult <IEnumerable<CourseDTO>> GetAllCourses()
         {
-            return "value";
+            return Ok(_courseService.GetAll());
         }
 
 
         [HttpPost]
-        public void AddCourse([FromBody] string value)
+        public ActionResult AddCourse([FromBody] CourseDTORequest course)
         {
+            return Created("GetCourse", _courseService.AddCourse(course));
         }
 
         [HttpPut("{id}")]
-        public void ModifyCourse(int id, [FromBody] string value)
+        public ActionResult ModifyCourse(Guid id, [FromBody] CourseDTORequest value)
         {
+            _courseService.UpdateCourse(id, value);
+            return NoContent();
         }
 
       

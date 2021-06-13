@@ -11,6 +11,19 @@ namespace RepositoryServiceContract
         
     public class User
     {
+        public User(Guid id, string name, string surname, string indexNumber, uint year, string password, string username, Roles role, Statuses status)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            IndexNumber = indexNumber;
+            Year = year;
+            Password = password;
+            Username = username;
+            Role = role;
+            Status = status;
+        }
+
         [Key]
         public Guid Id { get; set; }
 

@@ -7,6 +7,13 @@ namespace RepositoryServiceContract
 {
     public class Course
     {
+        public Course(Guid id, string name, string teacher)
+        {
+            Id = id;
+            Name = name;
+            Teacher = teacher;
+        }
+
         [Key]
         public Guid Id { get; set; }
 

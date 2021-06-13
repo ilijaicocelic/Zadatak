@@ -6,6 +6,19 @@ namespace ServiceContracts.DTO
 {
     public class UserDTO
     {
+        public UserDTO(Guid id, string name, string surname, string indexNumber, uint year, string password, string username, string role, string status)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            IndexNumber = indexNumber;
+            Year = year;
+            Password = password;
+            Username = username;
+            Role = role;
+            Status = status;
+        }
+
         public Guid Id { get; set; }
 
         public string Name { get; set; }
