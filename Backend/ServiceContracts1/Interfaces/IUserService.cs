@@ -8,7 +8,7 @@ namespace ServiceContracts.Interfaces
     public interface IUserService
     {
 
-        string Login(LoginFormDTO loginFormDTO);
+        LoginResponse Login(LoginFormDTO loginFormDTO);
 
         UserDTO GetUser(Guid Id);
 

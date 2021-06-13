@@ -18,6 +18,7 @@ using Repositories;
 using RepositoryServiceContract;
 using ServiceContracts.Interfaces;
 using Service;
+using ServiceContracts;
 
 namespace Backend
 {
@@ -47,8 +48,10 @@ namespace Backend
             services.AddControllers();
 
 
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
-            
+
+
             services.AddDbContext<DataBaseDB>(options =>
              options.UseSqlServer("Server=DESKTOP-4MA4L5D; Database=Zadatak; Trusted_Connection=True; MultipleActiveResultSets=True;")
              );

@@ -44,22 +44,22 @@ namespace Service
             return _userMapper.FromUserToDTO(_repositoryuser.GetUser(Id));
         }
 
-        public string Login(LoginFormDTO loginFormDTO)
+        public LoginResponse Login(LoginFormDTO loginFormDTO)
         {
             List<User> Users = _repositoryuser.GetAllUsers().ToList();
 
-            User u1 = Users.Where(x => x.Username == loginFormDTO.Username && x.Password == loginFormDTO.Password).First();
+            User u1 = Users.Where(x => x.Username == loginFormDTO.Username && x.Password == loginFormDTO.Password).FirstOrDefault();
             if(u1 == null)
             {
-                throw new KeyNotFoundException();
+                return null;
             }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                    {
-                        new Claim("UserId",user.Id.ToString()),
-                        new Claim("Roles", user.Role.ToString()),
+                        new Claim("UserId",u1.Id.ToString()),
+                        new Claim("Roles", u1.Role.ToString()),
 
                     }),
                 Expires = DateTime.UtcNow.AddDays(1),
@@ -68,8 +68,10 @@ namespace Service
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var token = tokenHandler.WriteToken(securityToken);
-
-            return token;
+            LoginResponse response = new LoginResponse();
+            response.user = _userMapper.FromUserToDTO(u1);
+            response.token = token;
+            return response ;
         }
 
         public void ModifyStudent(Guid Id, UserDTORequest userDTO)

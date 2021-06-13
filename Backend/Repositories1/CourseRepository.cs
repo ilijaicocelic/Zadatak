@@ -28,9 +28,11 @@ namespace Repositories
             return course.Id;
         }
 
-        public Guid AddStudentToCourse(Guid UserId, Guid CourseId)
+        public void AddStudentToCourse(Guid UserId, Guid CourseId)
         {
-            throw new NotImplementedException();
+            User u1 = _context.Users.Find(UserId);
+            _context.Courses.Include(x => x.Students).Where(x => x.Id == CourseId).First().Students.Add(u1);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Course> GetAll()

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceContracts.DTO;
@@ -20,13 +22,15 @@ namespace Backend.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("{id}", Name = "GetUser")]
+        [HttpGet]
+        [Route("GetUser/{id}")]
         public ActionResult <UserDTO> GetUser(Guid id)
         {
             return Ok(_userservice.GetUser(id));
         }
 
-        [HttpGet( Name = "GetAllUsers")]
+        [HttpGet]
+        [Route("GetAllUsers")]
         public ActionResult< IEnumerable<UserDTO>> GetAllUsers()
         {
             return Ok(_userservice.GetAllUsers());
@@ -34,13 +38,17 @@ namespace Backend.Controllers
 
         // POST: api/User
         [HttpPost]
+        [Route("AddUser")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult AddUser([FromBody] UserDTORequest user)
         {
             return Created("GetUser",_userservice.AddUser(user));
         }
 
         // PUT: api/User/5
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("ModifyStudent/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult ModifyStudent(Guid id, [FromBody] UserDTORequest value)
         {
             _userservice.ModifyStudent(id, value);
@@ -48,9 +56,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login([FromBody] LoginFormDTO form)
+        [Route("Login")]
+        public ActionResult Login( LoginFormDTO form)
         {
-            return Ok(_userservice.Login(form));
+            var data = _userservice.Login(form);
+            if (data != null)
+                return Ok(data);
+            else
+                return BadRequest();
         }
 
     }
