@@ -21,13 +21,15 @@ namespace Backend.Controllers
         {
             _courseService = service;
         }
-        [HttpGet("{id}", Name = "GetCourse")]
+        [HttpGet]
+        [Route("GetCourse/{id}")]
         public ActionResult <CourseDTO>GetCourse(Guid id)
         {
             return Ok(_courseService.GetCourse(id));
         }
 
-        [HttpGet(Name = "GetAllCourses")]
+        [HttpGet]
+        [Route("GetAllCourses")]
         public ActionResult <IEnumerable<CourseDTO>> GetAllCourses()
         {
             return Ok(_courseService.GetAll());
@@ -35,13 +37,15 @@ namespace Backend.Controllers
 
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult AddCourse([FromBody] CourseDTORequest course)
+        [Route("AddCourse")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult AddCourse(CourseDTORequest course)
         {
             return Created("GetCourse", _courseService.AddCourse(course));
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("GetAllCourses/{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult ModifyCourse(Guid id, [FromBody] CourseDTORequest value)
         {
@@ -50,14 +54,16 @@ namespace Backend.Controllers
         }
 
 
-        [HttpGet("{Id}")]
+        [HttpGet]
+        [Route("GetStudents/{Id}")]
         public ActionResult<IEnumerable<CourseDTO>> GetStudents(Guid Id)
         {
            
             return Ok(_courseService.GetStudents(Id));
         }
 
-        [HttpPut("{userId}/{CourseId}")]
+        [HttpPut]
+        [Route("AddStudent/{userId}/{CourseId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult AddStudent(Guid userId, Guid CourseId)
         {
@@ -65,7 +71,8 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{userId}/{CourseId}")]
+        [HttpDelete]
+        [Route("RemoveStudent/{userId}/{CourseId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
         public ActionResult RemoveStudent(Guid userId, Guid CourseId)
