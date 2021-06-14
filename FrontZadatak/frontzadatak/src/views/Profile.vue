@@ -1,19 +1,19 @@
 <template>
     <div>
             <div id="nav">
-       <router-link :to="{ name: 'students', params: { userId: currentUser.username}}">Students</router-link>|
-       <router-link :to="{ name: 'courses', params: { userId: currentUser.username}}">Courses</router-link>|
+       <router-link :to="{ name: 'students', params: { userId: currentUser.id}}">Students</router-link>|
+       <router-link :to="{ name: 'courses', params: { userId: currentUser.id}}">Courses</router-link>|
        <router-link to="/">
         <b-button type="submit" @click="login" variant="danger"  >   Logout   </b-button>
     </router-link>
     </div>
-        <h1> {{ user.name }}  {{ user.surname }} ({{ user.indexNumber }}) </h1>
+        <h1> {{ clickedUser.name }}  {{ clickedUser.surname }} ({{ clickedUser.indexNumber }}) </h1>
         <b-img left src="https://www.prijemni.rs/files/institution/institution_37/logo.jpg" alt="Left image"></b-img>
         <b-img right src="https://www.prijemni.rs/files/institution/institution_37/logo.jpg" alt="Right image"></b-img>
-        <p> Type of student: {{ user.type }} </p>
-        <p> Index Number : {{ user.indexNumber }} </p>
-        <p>Collegue year: {{ user.year }} </p>
-        <p> Role: {{ sRole }} </p>
+        <p> Type of student: {{ clickedUser.status }} </p>
+        <p> Index Number : {{ clickedUser.indexNumber }} </p>
+        <p>Collegue year: {{ clickedUser.year }} </p>
+        <p> Role: {{ clickedUser.role }} </p>
 
         <button @click="toggleStudForm" class="btn btn-primary"> Change Student</button>
         <b-form @submit.prevent="handleSubmit"  v-if="showStudForm">
@@ -73,6 +73,9 @@ export default {
     data () {
         return {
             currentUser: {},
+            clickedUser: {},
+            id1: '',
+            id2: '',
             user: {},
             sRole: 'Normal student',
              showStudForm: false,
@@ -134,6 +137,17 @@ export default {
         }
     },
     mounted () {
+         this.id1 = this.$route.params.userId
+              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
+            .then((respond) => {
+                this.currentUser = respond.data
+             })
+
+         this.id2 = this.$route.params.id
+              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id2)
+            .then((respond) => {
+                this.clickedUser = respond.data
+             })
         const user = this.students[this.$route.params.id]
          this.user = user
 

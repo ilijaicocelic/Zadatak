@@ -1,17 +1,17 @@
 <template>
     <div>
          <div id="nav">
-       <router-link :to="{ name: 'students', params: { userId: currentUser.username}}">Students</router-link>|
-       <router-link :to="{ name: 'courses', params: { userId: currentUser.username}}">Courses</router-link>|
+       <router-link :to="{ name: 'students', params: { userId: currentUser.id}}">Students</router-link>|
+       <router-link :to="{ name: 'courses', params: { userId: currentUser.id}}">Courses</router-link>|
           <router-link to="/">
         <b-button type="submit" @click="login" variant="danger"  >   Logout   </b-button>
     </router-link>
     </div>
         <h1 class="text-monospace" >List of all students</h1>
         <b-table striped hover :items="students">
-            <template #cell(name)="data">
+            <template #cell(id)="data">
         <!-- `data.value` is the value after formatted by the Formatter -->
-             <router-link :to="`/profile/${currentUser.username}/${data.index}`">
+             <router-link :to="`/profile/${currentUser.id}/${data.value}`">
                {{ data.value }}
                   </router-link>
              </template>
@@ -68,69 +68,35 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 
 export default {
     data () {
         return {
+            students: [],
             currentUser: {},
-            showStudForm: false,
-            formData: {
-                name: '',
-                surname: '',
-                indexNumber: '',
-                year: null,
-                type: null,
-                role: 1
-            },
-            years: [{ text: 'Select One', value: null }, 1, 2, 3, 4],
-            types: [{ text: 'Select One', value: null }, 'Regular', 'Advanced'],
-            show: true
+            id1: '',
+            id2: '',
+            showStudForm: false
         }
     },
-    computed: {
-        ...mapState([
-            'students'
-        ])
-    },
     methods: {
-        ...mapActions([
-            'addStudent'
-        ]),
         toggleStudForm () {
             this.showStudForm = !this.showStudForm
         },
         handleSubmit () {
-            const { name, surname, indexNumber, year, type, role } = this.formData
-            const payload = {
-                student: {
-                    name,
-                    surname,
-                    indexNumber,
-                    year,
-                    type,
-                    role
-                 }
-            }
-            this.addStudent(payload)
-
-            this.formData = {
-                name: '',
-                surname: '',
-                indexNumber: '',
-                year: null,
-                type: null,
-                role: 1
-            }
         }
     },
     mounted () {
-        const temp = this.$route.params.userId
-        for (let index = 0; index < this.students.length; index++) {
-            if (this.students[index].username === temp) {
-                this.currentUser = this.students[index]
-            }
-        }
+        this.axios.get('http://localhost:62612/api/user/GetAllUsers')
+            .then((respond) => {
+                this.students = respond.data
+             })
+
+              this.id1 = this.$route.params.userId
+              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
+            .then((respond) => {
+                this.currentUser = respond.data
+             })
     }
 }
 </script>
