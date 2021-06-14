@@ -45,9 +45,9 @@ namespace Backend.Controllers
         }
 
         [HttpPut]
-        [Route("GetAllCourses/{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult ModifyCourse(Guid id, [FromBody] CourseDTORequest value)
+        [Route("ModifyCourse/{id}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult ModifyCourse(Guid id, CourseDTORequest value)
         {
             _courseService.UpdateCourse(id, value);
             return NoContent();
