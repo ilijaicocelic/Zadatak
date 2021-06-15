@@ -39,8 +39,8 @@ namespace Backend.Controllers
         // POST: api/User
         [HttpPost]
         [Route("AddUser")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult AddUser([FromBody] UserDTORequest user)
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult AddUser(UserDTORequest user)
         {
             return Created("GetUser",_userservice.AddUser(user));
         }

@@ -5,38 +5,31 @@
       <router-link to="/NonLogedStudents">Students</router-link>|
       <router-link to="/NonLogedCourses">Courses</router-link>|
     </div>
-        <h1> {{ user.name }}  {{ user.surname }} ({{ user.indexNumber }}) </h1>
+        <h1> {{ clickedUser.name }}  {{ clickedUser.surname }} ({{ clickedUser.indexNumber }}) </h1>
         <b-img left src="https://www.prijemni.rs/files/institution/institution_37/logo.jpg" alt="Left image"></b-img>
         <b-img right src="https://www.prijemni.rs/files/institution/institution_37/logo.jpg" alt="Right image"></b-img>
-        <p> Type of student: {{ user.type }} </p>
-        <p> Index Number : {{ user.indexNumber }} </p>
-        <p>Collegue year: {{ user.year }} </p>
-        <p> Role: {{ sRole }} </p>
+        <p> Type of student: {{ clickedUser.status }} </p>
+        <p> Index Number : {{ clickedUser.indexNumber }} </p>
+        <p>Collegue year: {{ clickedUser.year }} </p>
+        <p> Role: {{ clickedUser.role }} </p>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 
 export default {
     data () {
         return {
-            user: {},
-            sRole: 'Normal student'
+            id1: '',
+            clickedUser: {}
         }
-    },
-    computed: {
-        ...mapState([
-            'students'
-        ])
     },
     mounted () {
-        const user = this.students[this.$route.params.id]
-         this.user = user
-
-        if (user.role === 0) {
-            this.sRole = 'Admin'
-        }
+         this.id1 = this.$route.params.id
+              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
+            .then((respond) => {
+                this.clickedUser = respond.data
+             })
     }
 }
 </script>

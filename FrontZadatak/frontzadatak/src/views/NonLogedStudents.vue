@@ -7,9 +7,9 @@
     </div>
         <h1 class="text-monospace" >List of all students</h1>
         <b-table striped hover :items="students">
-            <template #cell(name)="data">
+            <template #cell(id)="data">
         <!-- `data.value` is the value after formatted by the Formatter -->
-             <router-link :to="`/NonLogedProfile/${data.index}`">
+             <router-link :to="`/NonLogedProfile/${data.value}`">
                {{ data.value }}
                   </router-link>
              </template>
@@ -18,13 +18,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 
 export default {
-    computed: {
-        ...mapState([
-            'students'
-        ])
+    data () {
+        return {
+            students: []
+        }
+    },
+    mounted () {
+        this.axios.get('http://localhost:62612/api/user/GetAllUsers')
+            .then((respond) => {
+                this.students = respond.data
+             })
     }
 }
 </script>

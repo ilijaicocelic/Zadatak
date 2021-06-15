@@ -67,6 +67,9 @@ export default {
                 this.axios.get('http://localhost:62612/api/course/GetAllCourses')
             .then((respond) => {
                 this.courses = respond.data
+                this.showCourseForm = false
+                this.name = ''
+                this.teacher = ''
              })
              })
         }

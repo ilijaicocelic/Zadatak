@@ -148,21 +148,6 @@ export default {
             .then((respond) => {
                 this.clickedUser = respond.data
              })
-        const user = this.students[this.$route.params.id]
-         this.user = user
-
-        if (user.role === 0) {
-            this.sRole = 'Admin'
-        }
-        this.formData.username = user.username
-        this.formData.password = user.password
-
-        const temp = this.$route.params.userId
-        for (let index = 0; index < this.students.length; index++) {
-            if (this.students[index].username === temp) {
-                this.currentUser = this.students[index]
-            }
-        }
     }
 }
 </script>
