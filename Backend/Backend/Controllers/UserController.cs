@@ -48,8 +48,8 @@ namespace Backend.Controllers
         // PUT: api/User/5
         [HttpPut]
         [Route("ModifyStudent/{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult ModifyStudent(Guid id, [FromBody] UserDTORequest value)
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult ModifyStudent(Guid id, UserDTORequest value)
         {
             _userservice.ModifyStudent(id, value);
             return NoContent();

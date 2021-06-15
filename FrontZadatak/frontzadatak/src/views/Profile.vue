@@ -22,7 +22,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="formData.name"
+          v-model="name"
           placeholder="Enter name"
           required
         ></b-form-input>
@@ -31,7 +31,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="formData.surname"
+          v-model="surname"
           placeholder="Enter surname"
           required
         ></b-form-input>
@@ -40,7 +40,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="formData.indexNumber"
+          v-model="indexNumber"
           placeholder="Enter index number..."
           required
         ></b-form-input>
@@ -48,7 +48,7 @@
         <b-form-group id="input-group-3" label="Year:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="formData.year"
+          v-model="year"
           :options="years"
           required
         ></b-form-select>
@@ -56,10 +56,28 @@
        <b-form-group id="input-group-3" label="Type:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="formData.type"
-          :options="types"
+          v-model="status"
+          :options="statuses"
           required
         ></b-form-select>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Username:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          type="text"
+          v-model="username"
+          placeholder="Enter username"
+          required
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          type="text"
+          v-model="password"
+          placeholder="Enter new password"
+          required
+        ></b-form-input>
       </b-form-group>
          <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
@@ -67,7 +85,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 
 export default {
     data () {
@@ -77,63 +94,51 @@ export default {
             id1: '',
             id2: '',
             user: {},
-            sRole: 'Normal student',
              showStudForm: false,
-            formData: {
-                name: '',
-                surname: '',
-                indexNumber: '',
-                year: null,
-                type: null,
-                role: 1,
-                username: '',
-                password: ''
-            },
-            years: [{ text: 'Select One', value: null }, 1, 2, 3, 4],
-            types: [{ text: 'Select One', value: null }, 'Regular', 'Advanced'],
-            show: true
+            name: '',
+            surname: '',
+            indexNumber: '',
+            year: 1,
+            status: 'Regular',
+            username: '',
+            password: '',
+            role: 'Student',
+            statuses: [
+                { value: 'Regular', text: 'Regular Student' },
+                { value: 'Extramural', text: 'Advanced Student' }
+            ],
+            years: [
+                { value: 1, text: '1 year' },
+                { value: 2, text: '2 year' },
+                { value: 3, text: '3 year' },
+                { value: 4, text: '4 year' }
+            ]
         }
     },
-    computed: {
-        ...mapState([
-            'students'
-        ])
-    },
     methods: {
-        ...mapActions([
-            'modifyStudent'
-        ]),
         toggleStudForm () {
             this.showStudForm = !this.showStudForm
         },
-        handleSubmit () {
-            const { name, surname, indexNumber, year, type, role, username, password } = this.formData
-            const payload = {
-                student: {
-                    name,
-                    surname,
-                    indexNumber,
-                    year,
-                    type,
-                    role,
-                    username,
-                    password
-                 }
-            }
-            this.user.name = this.formData.name
-            this.user.surname = this.formData.surname
-            this.user.year = this.formData.year
-            this.user.indexNumber = this.formData.indexNumber
-            this.modifyStudent(payload)
-
-            this.formData = {
-                name: '',
-                surname: '',
-                indexNumber: '',
-                year: null,
-                type: null,
-                role: 1
-            }
+        handleSubmit (event) {
+            event.preventDefault()
+            var data = { name: this.name, surname: this.surname, indexNumber: this.indexNumber, year: this.year, username: this.username, password: this.password, role: this.role, status: this.status }
+            this.axios.put('http://localhost:62612/api/user/ModifyStudent/' + this.id2, data)
+            .then((respond) => {
+                     this.id1 = this.$route.params.id
+              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
+            .then((respond) => {
+                this.clickedUser = respond.data
+                this.showStudForm = false
+                this.name = ''
+                this.surname = ''
+                this.indexNumber = ''
+                this.years = 1
+                this.username = ''
+                this.password = ''
+                this.role = 'Student'
+                this.status = 'Regular'
+             })
+             })
         }
     },
     mounted () {
