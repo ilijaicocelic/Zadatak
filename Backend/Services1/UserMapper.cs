@@ -12,7 +12,7 @@ namespace Services
         public UserDTO FromUserToDTO(User user)
         {
 
-            return new UserDTO(user.Id,user.Name,user.Surname,user.IndexNumber,user.Year,user.Password,user.Username,user.Role.ToString(),user.Status.ToString());
+            return new UserDTO(user.Id,user.Name,user.Surname,user.IndexNumber,user.Year,user.Username,user.Role.ToString(),user.Status.ToString());
 
         }
 
