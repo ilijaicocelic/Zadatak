@@ -87,6 +87,8 @@
 
 <script>
 
+import axios from '../axios/api'
+
 export default {
     data () {
         return {
@@ -141,7 +143,7 @@ export default {
         }
     },
     mounted () {
-        this.axios.get('http://localhost:62612/api/user/GetAllUsers')
+        axios.get('user/GetAllUsers')
             .then((respond) => {
                 this.students = respond.data
              })

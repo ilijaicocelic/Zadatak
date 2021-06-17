@@ -22,7 +22,7 @@
       :invalid-feedback="invalidFeedback"
       :state="state"
     >
-      <b-form-input id="input-1" v-model="username" :state="state" trim></b-form-input>
+      <b-form-input id="input-1" v-model="model.username" :state="state" trim></b-form-input>
     </b-form-group>
     <br>
      <b-form-group
@@ -34,7 +34,7 @@
       :invalid-feedback="invalidFeedback1"
       :state="state1"
     >
-      <b-form-input id="input-2" v-model="password" :state="state1" trim></b-form-input>
+      <b-form-input id="input-2" v-model="model.password" :state="state1" trim></b-form-input>
     </b-form-group>
     <br>
         <b-button type="submit" variant="primary"  >   CONFIRM   </b-button>
@@ -45,6 +45,7 @@
 <script>
 import students from '../data/students'
 import router from '../router/index'
+import axios from '../axios/api'
 
   export default {
     name: 'home',
@@ -52,66 +53,56 @@ import router from '../router/index'
       return {
         students,
         user1: {},
-        username: '',
-        password: '',
-        isDisabled: true
+        isDisabled: true,
+        model: {
+            username: '',
+            password: ''
+        }
       }
     },
     computed: {
       state () {
-          if (this.username.length >= 4) {
+          if (this.model.username.length >= 4) {
               return true
-          } else if (this.username.length === 0) {
+          } else if (this.model.username.length === 0) {
               return null
           } else {
               return false
           }
       },
       state1 () {
-          if (this.password.length >= 6) {
+          if (this.model.password.length >= 6) {
               return true
-          } else if (this.password.length === 0) {
+          } else if (this.model.password.length === 0) {
               return null
           } else {
               return false
           }
       },
       invalidFeedback () {
-        if (this.username.length > 0) {
+        if (this.model.username.length > 0) {
           return 'Enter at least 4 characters.'
         }
         return 'Please enter something.'
       },
       invalidFeedback1 () {
-          if (this.password.length > 0) {
+          if (this.model.password.length > 0) {
               return 'Password to short'
-          } else if (this.password.length === 0) {
+          } else if (this.model.password.length === 0) {
               return null
-          } else {
+         } else {
               return 'Enter your password please'
           }
       }
     },
     methods: {
-        login (event) {
-            event.preventDefault()
-            // for (let index = 0; index < this.students.length; index++) {
-            //    if (this.students[index].username === this.username && this.students[index].password === this.password && this.students[index].role === 0) {
-            //      this.user1 = this.students[index]
-            //      this.isDisabled = false
-            //    }
-            // }
-            var data = { username: this.username, password: this.password }
-            this.axios.post('http://localhost:62612/api/user/login', data)
-            .then((respond) => {
-                localStorage.token = respond.data.token
-                this.user1 = respond.data.user
-                router.push({ name: 'students', params: { userId: this.user1.id } })
+       async login () {
+            const response = await axios.post('user/login', this.model).catch(() => {
+                alert('U cant log in')
             })
-            .catch(() => {
-                alert('Sorry we can not log u')
-            }
-            )
+            localStorage.token = response.data.token
+            localStorage.user = JSON.stringify(response.data.user)
+            router.push({ name: 'students', params: { userId: JSON.parse(localStorage.user).id } })
         }
     }
   }
