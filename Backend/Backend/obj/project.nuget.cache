@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zBDc/zp33zdw/RCuPP11pp1bYOd0v+eD5WlFqJ0a80c/lrr8JA2aUrnFLnCGiaNSRACkvTiftm8XDWwvi2VCyw==",
+  "dgSpecHash": "myaJF6LgbX7r/lk7zqeTumrDF3HOHLOfN9v4bVI0cMWtNLKjU/q9NuomumkoAB0NDRJYRiXyqQ9oAZIi53kBrg==",
   "success": true,
   "projectFilePath": "C:\\Users\\icoce\\Desktop\\Zadatak\\Backend\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\icoce\\.nuget\\packages\\microsoft.identitymodel.tokens\\5.6.0\\microsoft.identitymodel.tokens.5.6.0.nupkg.sha512",
     "C:\\Users\\icoce\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\icoce\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\icoce\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.8\\microsoft.visualstudio.azure.containers.tools.targets.1.10.8.nupkg.sha512",
     "C:\\Users\\icoce\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\3.1.5\\microsoft.visualstudio.web.codegeneration.3.1.5.nupkg.sha512",
     "C:\\Users\\icoce\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.contracts\\3.1.5\\microsoft.visualstudio.web.codegeneration.contracts.3.1.5.nupkg.sha512",
     "C:\\Users\\icoce\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\3.1.5\\microsoft.visualstudio.web.codegeneration.core.3.1.5.nupkg.sha512",

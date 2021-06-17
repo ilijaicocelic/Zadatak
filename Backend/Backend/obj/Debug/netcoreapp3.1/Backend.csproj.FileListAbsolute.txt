@@ -134,9 +134,9 @@ C:\Users\icoce\Desktop\Zadatak\Backend\Backend\obj\Debug\netcoreapp3.1\Backend.d
 C:\Users\icoce\Desktop\Zadatak\Backend\Backend\obj\Debug\netcoreapp3.1\Backend.pdb
 C:\Users\icoce\Desktop\Zadatak\Backend\Backend\obj\Debug\netcoreapp3.1\Backend.genruntimeconfig.cache
 C:\Users\icoce\Desktop\Zadatak\Backend\Backend\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\icoce\Desktop\Zadatak\Backend\Backend\obj\Debug\netcoreapp3.1\Backend.csproj.CoreCompileInputs.cache
-C:\Users\icoce\Desktop\Zadatak\Backend\Backend\obj\Debug\netcoreapp3.1\Backend.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\icoce\Desktop\Zadatak\Backend\Backend\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 C:\Users\icoce\Desktop\Zadatak\Backend\Backend\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
 C:\Users\icoce\Desktop\Zadatak\Backend\Backend\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\icoce\Desktop\Zadatak\Backend\Backend\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\icoce\Desktop\Zadatak\Backend\Backend\obj\Debug\netcoreapp3.1\Backend.csproj.CoreCompileInputs.cache
+C:\Users\icoce\Desktop\Zadatak\Backend\Backend\obj\Debug\netcoreapp3.1\Backend.MvcApplicationPartsAssemblyInfo.cache
