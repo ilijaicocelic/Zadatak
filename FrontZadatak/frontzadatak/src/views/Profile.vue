@@ -16,6 +16,19 @@
         <p> Role: {{ clickedUser.role }} </p>
 
         <button @click="toggleStudForm" class="btn btn-primary"> Change Student</button>
+        <button @click="toggleCourseForm" class="btn btn-primary"> Add to course</button>
+        <b-form @submit.prevent="handleSubmit1"  v-if="showCourseForm">
+            <b-form-group id="input-group-3" label="Year:" label-for="input-3">
+        <b-form-select
+          id="input-3"
+          v-model="addCourseModel.courseId"
+          :options="courses"
+          required
+        ></b-form-select>
+      </b-form-group>
+       <b-button type="submit" variant="primary">Submit</b-button>
+        </b-form>
+
         <b-form @submit.prevent="handleSubmit"  v-if="showStudForm">
         <br>
       <b-form-group id="input-group-2" label="Name:" label-for="input-2">
@@ -86,15 +99,23 @@
 
 <script>
 
+import axios from '../axios/api'
+
 export default {
     data () {
         return {
             currentUser: {},
             clickedUser: {},
+            courses: [],
             id1: '',
             id2: '',
             user: {},
+            addCourseModel: {
+                userId: '',
+                courseId: ''
+            },
              showStudForm: false,
+             showCourseForm: false,
             name: '',
             surname: '',
             indexNumber: '',
@@ -119,6 +140,9 @@ export default {
         toggleStudForm () {
             this.showStudForm = !this.showStudForm
         },
+        toggleCourseForm () {
+            this.showCourseForm = !this.showCourseForm
+        },
         handleSubmit (event) {
             event.preventDefault()
             var data = { name: this.name, surname: this.surname, indexNumber: this.indexNumber, year: this.year, username: this.username, password: this.password, role: this.role, status: this.status }
@@ -139,9 +163,19 @@ export default {
                 this.status = 'Regular'
              })
              })
-        }
+        },
+         async handleSubmit1 () {
+             await axios.put('course/AddStudent', this.addCourseModel).catch(() => { alert('error') })
+             alert('Succesfully added !')
+         }
     },
     mounted () {
+        axios.get('course/GetNamesOfCourses').then((response) => {
+            this.courses = response.data
+        })
+        .catch(() => {
+                alert('Error')
+            })
          this.id1 = this.$route.params.userId
               this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
             .then((respond) => {
@@ -153,6 +187,7 @@ export default {
             .then((respond) => {
                 this.clickedUser = respond.data
              })
+            this.addCourseModel.userId = this.id2
     }
 }
 </script>

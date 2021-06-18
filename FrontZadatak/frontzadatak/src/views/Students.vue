@@ -23,7 +23,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="name"
+          v-model="model.name"
           placeholder="Enter name"
           required
         ></b-form-input>
@@ -32,7 +32,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="surname"
+          v-model="model.surname"
           placeholder="Enter surname"
           required
         ></b-form-input>
@@ -41,7 +41,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="indexNumber"
+          v-model="model.indexNumber"
           placeholder="Enter index number..."
           required
         ></b-form-input>
@@ -49,7 +49,7 @@
         <b-form-group id="input-group-3" label="Year:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="year"
+          v-model="model.year"
           :options="years"
           required
         ></b-form-select>
@@ -57,7 +57,7 @@
        <b-form-group id="input-group-3" label="Type:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="status"
+          v-model="model.status"
           :options="statuses"
           required
         ></b-form-select>
@@ -66,7 +66,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="username"
+          v-model="model.username"
           placeholder="Enter a new username"
           required
         ></b-form-input>
@@ -75,7 +75,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="password"
+          v-model="model.password"
           placeholder="Set his first password..."
           required
         ></b-form-input>
@@ -94,17 +94,19 @@ export default {
         return {
             students: [],
             currentUser: {},
-            id1: '',
-            id2: '',
-            showStudForm: false,
-            name: '',
+            model: {
+             name: '',
             surname: '',
             indexNumber: '',
             year: 1,
             status: 'Regular',
             username: '',
             password: '',
-            role: 'Student',
+            role: 'Student'
+        },
+            id1: '',
+            id2: '',
+            showStudForm: false,
             statuses: [
                 { value: 'Regular', text: 'Regular Student' },
                 { value: 'Extramural', text: 'Advanced Student' }
@@ -123,8 +125,7 @@ export default {
         },
         handleSubmit (event) {
             event.preventDefault()
-            var data = { name: this.name, surname: this.surname, indexNumber: this.indexNumber, year: this.year, username: this.username, password: this.password, role: this.role, status: this.status }
-            this.axios.post('http://localhost:62612/api/user/AddUser', data)
+            this.axios.post('http://localhost:62612/api/user/AddUser', this.model)
             .then((respond) => {
                      this.axios.get('http://localhost:62612/api/user/GetAllUsers')
             .then((respond) => {
@@ -147,12 +148,12 @@ export default {
             .then((respond) => {
                 this.students = respond.data
              })
-
-              this.id1 = this.$route.params.userId
-              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
-            .then((respond) => {
-                this.currentUser = respond.data
-             })
+            this.currentUser = JSON.parse(localStorage.user)
+            //  this.id1 = this.$route.params.userId
+              //  this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
+            //  .then((respond) => {
+             //   this.currentUser = respond.data
+             // })
     }
 }
 </script>

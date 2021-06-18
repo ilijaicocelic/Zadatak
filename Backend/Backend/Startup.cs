@@ -51,7 +51,7 @@ namespace Backend
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             var connection = @"Server=db;Database=master;User=sa;Password=Icocelic2808!;";
-           // var oldconnection = @"Server=DESKTOP-4MA4L5D; Database=Zadatak; Trusted_Connection=True; MultipleActiveResultSets=True;"
+            //var connection = @"Server=DESKTOP-4MA4L5D; Database=Zadatak; Trusted_Connection=True; MultipleActiveResultSets=True;";
             services.AddDbContext<DataBaseDB>(options =>
              options.UseSqlServer(connection)
              );

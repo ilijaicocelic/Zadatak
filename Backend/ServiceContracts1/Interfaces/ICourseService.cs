@@ -21,6 +21,8 @@ namespace ServiceContracts.Interfaces
 
         IEnumerable<UserDTO> GetStudents(Guid CourseId);
 
+        IEnumerable<SimplifiedCourseDTO> GetNamesOfCourses();
+
 
     }
 }

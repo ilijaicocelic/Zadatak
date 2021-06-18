@@ -56,18 +56,18 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("GetStudents/{Id}")]
-        public ActionResult<IEnumerable<CourseDTO>> GetStudents(Guid Id)
+        public ActionResult<IEnumerable<UserDTO>> GetStudents(Guid Id)
         {
            
             return Ok(_courseService.GetStudents(Id));
         }
 
         [HttpPut]
-        [Route("AddStudent/{userId}/{CourseId}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult AddStudent(Guid userId, Guid CourseId)
+        [Route("AddStudent")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public ActionResult AddStudent(AddStudentDTO data)
         {
-            _courseService.AddStudentToCourse(userId, CourseId);
+            _courseService.AddStudentToCourse(data.userId, data.courseId);
             return NoContent();
         }
 
@@ -81,6 +81,13 @@ namespace Backend.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("GetNamesOfCourses")]
+        public ActionResult<IEnumerable<CourseDTO>> GetNamesOfCourses()
+        {
+
+            return Ok(_courseService.GetNamesOfCourses());
+        }
 
 
     }

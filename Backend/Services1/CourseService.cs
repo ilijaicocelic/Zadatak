@@ -4,6 +4,7 @@ using ServiceContracts.Interfaces;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Service
@@ -39,6 +40,18 @@ namespace Service
         public CourseDTO GetCourse(Guid Id)
         {
             return _courseMapper.FromCourseToDTO(_courseRepository.GetCourse(Id));
+        }
+
+        public IEnumerable<SimplifiedCourseDTO> GetNamesOfCourses()
+        {
+            List<Course> list =  _courseRepository.GetAll().ToList();
+            List<SimplifiedCourseDTO> result = new List<SimplifiedCourseDTO>();
+            foreach (var item in list)
+            {
+                SimplifiedCourseDTO temp = new SimplifiedCourseDTO(item.Id, item.Name);
+                result.Add(temp);
+            }
+            return result;
         }
 
         public IEnumerable<UserDTO> GetStudents(Guid CourseId)
