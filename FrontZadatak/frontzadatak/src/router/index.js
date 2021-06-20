@@ -19,22 +19,22 @@ const routes = [
     component: Home
   },
   {
-    path: '/students/:userId',
+    path: '/students',
     name: 'students',
     component: Students
   },
   {
-    path: '/courses/:userId',
+    path: '/courses',
     name: 'courses',
     component: Courses
   },
   {
-    path: '/profile/:userId/:id',
+    path: '/profile/:id',
     name: 'profile',
     component: Profile
   },
   {
-    path: '/courseprofile/:userId/:id',
+    path: '/courseprofile/:id',
     name: 'courseprofile',
     component: CourseProfile
   },
@@ -61,7 +61,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  mode: 'history',
+  routes: routes
 })
 
 export default router

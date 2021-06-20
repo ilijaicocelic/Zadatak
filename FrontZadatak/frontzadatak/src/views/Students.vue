@@ -1,17 +1,17 @@
 <template>
     <div>
          <div id="nav">
-       <router-link :to="{ name: 'students', params: { userId: currentUser.id}}">Students</router-link>|
-       <router-link :to="{ name: 'courses', params: { userId: currentUser.id}}">Courses</router-link>|
+       <router-link :to="{ name: 'students' }">Students</router-link>|
+       <router-link :to="{ name: 'courses' }">Courses</router-link>|
           <router-link to="/">
-        <b-button type="submit" @click="login" variant="danger"  >   Logout   </b-button>
+        <b-button  @click="logout" variant="danger"  >   Logout   </b-button>
     </router-link>
     </div>
         <h1 class="text-monospace" >List of all students</h1>
         <b-table striped hover :items="students">
             <template #cell(id)="data">
         <!-- `data.value` is the value after formatted by the Formatter -->
-             <router-link :to="`/profile/${currentUser.id}/${data.value}`">
+             <router-link :to="`/profile/${data.value}`">
                {{ data.value }}
                   </router-link>
              </template>
@@ -88,12 +88,12 @@
 <script>
 
 import axios from '../axios/api'
+import router from '../router/index'
 
 export default {
     data () {
         return {
             students: [],
-            currentUser: {},
             model: {
              name: '',
             surname: '',
@@ -123,37 +123,28 @@ export default {
         toggleStudForm () {
             this.showStudForm = !this.showStudForm
         },
-        handleSubmit (event) {
-            event.preventDefault()
-            this.axios.post('http://localhost:62612/api/user/AddUser', this.model)
-            .then((respond) => {
-                     this.axios.get('http://localhost:62612/api/user/GetAllUsers')
-            .then((respond) => {
-                this.students = respond.data
-                this.showStudForm = false
-                this.name = ''
-                this.surname = ''
-                this.indexNumber = ''
-                this.years = 1
-                this.username = ''
-                this.password = ''
-                this.role = 'Student'
-                this.status = 'Regular'
-             })
-             })
+        async handleSubmit () {
+            await axios.post('user/AddUser', this.model).catch(() => {
+                alert('Error, cant add student')
+                router.push({ name: 'students' })
+            })
+            alert('Successfully added ')
+            const respond1 = await axios.get('user/GetAllUsers')
+            this.students = respond1.data
+             this.model = {}
+             this.showStudForm = !this.showStudForm
+        },
+        logout () {
+            localStorage.user = null
+            localStorage.token = null
+            router.push('/')
         }
     },
-    mounted () {
-        axios.get('user/GetAllUsers')
-            .then((respond) => {
-                this.students = respond.data
-             })
-            this.currentUser = JSON.parse(localStorage.user)
-            //  this.id1 = this.$route.params.userId
-              //  this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
-            //  .then((respond) => {
-             //   this.currentUser = respond.data
-             // })
+   async mounted () {
+     const respond = await axios.get('user/GetAllUsers').catch(() => {
+         alert('Error')
+     })
+         this.students = respond.data
     }
 }
 </script>

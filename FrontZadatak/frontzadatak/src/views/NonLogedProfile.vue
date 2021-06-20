@@ -17,6 +17,8 @@
 
 <script>
 
+import axios from '../axios/api'
+
 export default {
     data () {
         return {
@@ -24,12 +26,10 @@ export default {
             clickedUser: {}
         }
     },
-    mounted () {
+   async mounted () {
          this.id1 = this.$route.params.id
-              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
-            .then((respond) => {
+          const respond = await axios.get('user/getUser/' + this.id1)
                 this.clickedUser = respond.data
-             })
     }
 }
 </script>

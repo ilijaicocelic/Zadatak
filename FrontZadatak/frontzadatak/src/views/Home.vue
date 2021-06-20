@@ -12,7 +12,7 @@
      <br>
      <br>
      <br>
-     <b-form @submit="login" >
+     <b-form>
     <b-form-group
       id="fieldset-1"
       description="Note: at least 4 characters."
@@ -22,7 +22,7 @@
       :invalid-feedback="invalidFeedback"
       :state="state"
     >
-      <b-form-input id="input-1" v-model="model.username" :state="state" trim></b-form-input>
+      <b-form-input id="input-1" v-model="model.username" :state="state"  trim></b-form-input>
     </b-form-group>
     <br>
      <b-form-group
@@ -34,10 +34,10 @@
       :invalid-feedback="invalidFeedback1"
       :state="state1"
     >
-      <b-form-input id="input-2" v-model="model.password" :state="state1" trim></b-form-input>
+      <b-form-input id="input-2" v-model="model.password" :state="state1" type="password" trim></b-form-input>
     </b-form-group>
     <br>
-        <b-button type="submit" variant="primary"  >   CONFIRM   </b-button>
+        <b-button  @click="login" variant="primary"  >   CONFIRM   </b-button>
     </b-form>
   </div>
 </template>
@@ -102,7 +102,7 @@ import axios from '../axios/api'
             })
             localStorage.token = response.data.token
             localStorage.user = JSON.stringify(response.data.user)
-            router.push({ name: 'students', params: { userId: JSON.parse(localStorage.user).id } })
+            router.push({ name: 'students' })
         }
     }
   }

@@ -18,17 +18,17 @@
 </template>
 <script>
 
+import axios from '../axios/api'
+
 export default {
     data () {
         return {
             courses: []
         }
     },
-    mounted () {
-         this.axios.get('http://localhost:62612/api/course/GetAllCourses')
-            .then((respond) => {
+    async mounted () {
+        const respond = await axios.get('course/GetAllCourses')
                 this.courses = respond.data
-             })
     }
 }
 </script>

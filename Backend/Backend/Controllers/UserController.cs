@@ -39,7 +39,7 @@ namespace Backend.Controllers
         // POST: api/User
         [HttpPost]
         [Route("AddUser")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult AddUser(UserDTORequest user)
         {
             return Created("GetUser",_userservice.AddUser(user));
@@ -48,7 +48,7 @@ namespace Backend.Controllers
         // PUT: api/User/5
         [HttpPut]
         [Route("ModifyStudent/{id}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult ModifyStudent(Guid id, UserDTORequest value)
         {
             _userservice.ModifyStudent(id, value);

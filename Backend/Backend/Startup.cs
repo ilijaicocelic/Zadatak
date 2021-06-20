@@ -95,9 +95,9 @@ namespace Backend
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseCors();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

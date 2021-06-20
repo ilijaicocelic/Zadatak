@@ -78,6 +78,11 @@ namespace Service
         {
             User user = _userMapper.FromDTOUserToUser(userDTO);
             user.Id = Id;
+            User u1 = _repositoryuser.GetUser(Id);
+            if(u1.Role == Roles.Admin)
+            {
+                user.Role = Roles.Admin;
+            }
             _repositoryuser.UpdateUser(user);
         }
     }

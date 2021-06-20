@@ -38,7 +38,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("AddCourse")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult AddCourse(CourseDTORequest course)
         {
             return Created("GetCourse", _courseService.AddCourse(course));
@@ -46,7 +46,7 @@ namespace Backend.Controllers
 
         [HttpPut]
         [Route("ModifyCourse/{id}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult ModifyCourse(Guid id, CourseDTORequest value)
         {
             _courseService.UpdateCourse(id, value);
@@ -64,7 +64,7 @@ namespace Backend.Controllers
 
         [HttpPut]
         [Route("AddStudent")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult AddStudent(AddStudentDTO data)
         {
             _courseService.AddStudentToCourse(data.userId, data.courseId);

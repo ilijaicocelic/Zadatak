@@ -1,24 +1,24 @@
 <template>
     <div>
             <div id="nav">
-       <router-link :to="{ name: 'students', params: { userId: currentUser.id}}">Students</router-link>|
-       <router-link :to="{ name: 'courses', params: { userId: currentUser.id}}">Courses</router-link>|
+       <router-link :to="{ name: 'students'}">Students</router-link>|
+       <router-link :to="{ name: 'courses'}">Courses</router-link>|
        <router-link to="/">
-        <b-button type="submit" @click="login" variant="danger"  >   Logout   </b-button>
+        <b-button  @click="logout" variant="danger"  >   Logout   </b-button>
     </router-link>
     </div>
-        <h1> {{ clickedUser.name }}  {{ clickedUser.surname }} ({{ clickedUser.indexNumber }}) </h1>
+        <h1> {{ model.name }}  {{ model.surname }} ({{ model.indexNumber }}) </h1>
         <b-img left src="https://www.prijemni.rs/files/institution/institution_37/logo.jpg" alt="Left image"></b-img>
         <b-img right src="https://www.prijemni.rs/files/institution/institution_37/logo.jpg" alt="Right image"></b-img>
-        <p> Type of student: {{ clickedUser.status }} </p>
-        <p> Index Number : {{ clickedUser.indexNumber }} </p>
-        <p>Collegue year: {{ clickedUser.year }} </p>
-        <p> Role: {{ clickedUser.role }} </p>
+        <p> Type of student: {{ model.status }} </p>
+        <p> Index Number : {{ model.indexNumber }} </p>
+        <p>Collegue year: {{ model.year }} </p>
+        <p> Role: {{ model.role }} </p>
 
-        <button @click="toggleStudForm" class="btn btn-primary"> Change Student</button>
+        <button @click="toggleStudForm" class="btn btn-primary"> Change Student</button>&nbsp;
         <button @click="toggleCourseForm" class="btn btn-primary"> Add to course</button>
         <b-form @submit.prevent="handleSubmit1"  v-if="showCourseForm">
-            <b-form-group id="input-group-3" label="Year:" label-for="input-3">
+            <b-form-group id="input-group-3" label="Select Course to Add:" label-for="input-3">
         <b-form-select
           id="input-3"
           v-model="addCourseModel.courseId"
@@ -35,8 +35,9 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="name"
+          v-model="model.name"
           placeholder="Enter name"
+          value="clickedUser.name"
           required
         ></b-form-input>
       </b-form-group>
@@ -44,7 +45,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="surname"
+          v-model="model.surname"
           placeholder="Enter surname"
           required
         ></b-form-input>
@@ -53,7 +54,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="indexNumber"
+          v-model="model.indexNumber"
           placeholder="Enter index number..."
           required
         ></b-form-input>
@@ -61,7 +62,7 @@
         <b-form-group id="input-group-3" label="Year:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="year"
+          v-model="model.year"
           :options="years"
           required
         ></b-form-select>
@@ -69,7 +70,7 @@
        <b-form-group id="input-group-3" label="Type:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="status"
+          v-model="model.status"
           :options="statuses"
           required
         ></b-form-select>
@@ -78,7 +79,7 @@
         <b-form-input
           id="input-2"
           type="text"
-          v-model="username"
+          v-model="model.username"
           placeholder="Enter username"
           required
         ></b-form-input>
@@ -86,10 +87,10 @@
       <b-form-group id="input-group-2" label="Password:" label-for="input-2">
         <b-form-input
           id="input-2"
-          type="text"
-          v-model="password"
+          v-model="model.password"
           placeholder="Enter new password"
           required
+         type="password"
         ></b-form-input>
       </b-form-group>
          <b-button type="submit" variant="primary">Submit</b-button>
@@ -100,22 +101,18 @@
 <script>
 
 import axios from '../axios/api'
+import router from '../router/index'
 
 export default {
     data () {
         return {
-            currentUser: {},
-            clickedUser: {},
             courses: [],
-            id1: '',
             id2: '',
-            user: {},
             addCourseModel: {
                 userId: '',
                 courseId: ''
             },
-             showStudForm: false,
-             showCourseForm: false,
+            model: {
             name: '',
             surname: '',
             indexNumber: '',
@@ -123,7 +120,10 @@ export default {
             status: 'Regular',
             username: '',
             password: '',
-            role: 'Student',
+            role: 'Student'
+            },
+             showStudForm: false,
+             showCourseForm: false,
             statuses: [
                 { value: 'Regular', text: 'Regular Student' },
                 { value: 'Extramural', text: 'Advanced Student' }
@@ -143,50 +143,34 @@ export default {
         toggleCourseForm () {
             this.showCourseForm = !this.showCourseForm
         },
-        handleSubmit (event) {
-            event.preventDefault()
-            var data = { name: this.name, surname: this.surname, indexNumber: this.indexNumber, year: this.year, username: this.username, password: this.password, role: this.role, status: this.status }
-            this.axios.put('http://localhost:62612/api/user/ModifyStudent/' + this.id2, data)
-            .then((respond) => {
-                     this.id1 = this.$route.params.id
-              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
-            .then((respond) => {
-                this.clickedUser = respond.data
-                this.showStudForm = false
-                this.name = ''
-                this.surname = ''
-                this.indexNumber = ''
-                this.years = 1
-                this.username = ''
-                this.password = ''
-                this.role = 'Student'
-                this.status = 'Regular'
-             })
-             })
+       async handleSubmit () {
+           await axios.put('user/ModifyStudent/' + this.id2, this.model).catch(() => {
+               alert('Error, cant modify student!')
+               router.go()
+           })
+           alert('Successfully modified')
+                  this.showStudForm = !this.showStudForm
         },
          async handleSubmit1 () {
              await axios.put('course/AddStudent', this.addCourseModel).catch(() => { alert('error') })
              alert('Succesfully added !')
-         }
+             this.showCourseForm = !this.showCourseForm
+         },
+         logout () {
+            localStorage.user = null
+            localStorage.token = null
+            router.push('/')
+        }
     },
-    mounted () {
-        axios.get('course/GetNamesOfCourses').then((response) => {
-            this.courses = response.data
-        })
-        .catch(() => {
+    async mounted () {
+        const response = await axios.get('course/GetNamesOfCourses').catch(() => {
                 alert('Error')
             })
-         this.id1 = this.$route.params.userId
-              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id1)
-            .then((respond) => {
-                this.currentUser = respond.data
-             })
+            this.courses = response.data
 
          this.id2 = this.$route.params.id
-              this.axios.get('http://localhost:62612/api/user/getUser/' + this.id2)
-            .then((respond) => {
-                this.clickedUser = respond.data
-             })
+              const response1 = await axios.get('user/getUser/' + this.id2)
+            this.model = response1.data
             this.addCourseModel.userId = this.id2
     }
 }

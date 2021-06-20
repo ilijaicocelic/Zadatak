@@ -19,17 +19,17 @@
 
 <script>
 
+import axios from '../axios/api'
+
 export default {
     data () {
         return {
             students: []
         }
     },
-    mounted () {
-        this.axios.get('http://localhost:62612/api/user/GetAllUsers')
-            .then((respond) => {
+   async mounted () {
+        const respond = await axios.get('user/GetAllUsers')
                 this.students = respond.data
-             })
     }
 }
 </script>

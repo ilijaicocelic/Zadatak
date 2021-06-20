@@ -19,6 +19,8 @@
 
 <script>
 
+import axios from '../axios/api'
+
 export default {
     data () {
         return {
@@ -26,12 +28,10 @@ export default {
             clickedCourse: {}
         }
     },
-    mounted () {
+    async mounted () {
         this.id = this.$route.params.id
-              this.axios.get('http://localhost:62612/api/course/GetCourse/' + this.id)
-            .then((respond) => {
+           const respond = await axios.get('course/GetCourse/' + this.id)
                 this.clickedCourse = respond.data
-             })
     }
 }
 </script>
