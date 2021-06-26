@@ -15,3 +15,13 @@ services:
     environment:
       SA_PASSWORD: "Icocelic2808!"
       ACCEPT_EULA: "Y"
+  vue-ui:
+    build:
+      context: ./../FrontZadatak/frontzadatak
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: vue-ui
+    volumes:
+       - ./../FrontZadatak/frontzadatak:/usr/src/app/frontzadatak
+     
