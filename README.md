@@ -2,12 +2,12 @@
 
 ## Description
 
-The Student Service application  is an simple simulation of a classic student service. The system Administrator has the abillity to apply some basic actions like addition or modification on the students and courses of the faculty. On the othiser side, any other site visitor has the possibility the preview all basic inormations of any student or any course, but he can't take any actions on them.
+The Student Service application  is an simple simulation of a classic student service. The system Administrator has the abillity to apply some basic actions like addition or modification on the students and courses of the faculty. On the other side, any other  visitor has the possibility the preview all basic inormations of any student or any course, but he can't take any actions on them.
 
 ## How to run the application ? 
 
 First of all, make sure that your Docker Desktop App is running in the backgroud. If your don't have it u can
-download it for free from [Download Docker](http:/https://www.docker.com/products/docker-desktop/ "Download Docker") and install it. After you have dont it, you have to position yourself
+download it for free from [Download Docker](http:/https://www.docker.com/products/docker-desktop/ "Download Docker") and install it. After you have done it, you have to position yourself
 into the folder where the docker-compose.yaml file is located. For example, in my case it is:
 
 	C:\Users\ico\Desktop\Zadatak\Backend
@@ -31,16 +31,16 @@ If there are existing containers for a service, and the service’s configuratio
 
   	no-recreate flag.
 
-If you want to stop containers from working, you can do it by pressing the the 'q' button and control button in the same time, or simply just my closing the Command Prompt window.
+If you want to stop the containers from working, you can do it by pressing the the 'q' button and control button in the same time, or simply just by closing the Command Prompt window.
 
 
 ## Some useful commands
 
 	docker ps   						- List containers
 
-	docker pull 						-Pull an image or a reposotory form a registry
+	docker pull 						-Pull an image or a repository form a registry
 
-	docker push  	   		    	  - Push an image or a reposotory to a registry 
+	docker push  	   		    	  - Push an image or a repository to a registry 
 
 	docker build               			-Build an image from a Dockerfile
 
